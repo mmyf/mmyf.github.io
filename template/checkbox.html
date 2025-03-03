@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>checkbox</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div>
+
+    </div>
+</body>
+<script>
+/**
+ * @author 缪一帆 2022-07-01
+ * 创建单/多选通用函数
+ * @param {string} divId div容器元素ID，容纳选项的div
+ * @param {Array<Object>} data 绑定的数据
+ * @param {String} dataDesc 绑定的数据中对应的文本内容属性
+ * @param {String} dataValue 绑定的数据中对应的值属性
+ * @param {String} css 选项样式名
+ * @param {String} cssChecked 选项选中样式名
+ * @param {Boolean} isRadio 是否是单选,false为多选
+ * @param {String} clickFun 点击事件 入参(p1,p2)为 (选项元素本身,当前选中值)
+ * @returns {Function} getCheckedArr 获取当前选中,返回值为Array
+ * @returns {Object} {html:divHtml, getValue:getCheckedArr} 返回html串时（无divId时）提供
+ * @modify myf 2022-10-11 重写提供给页面配置html串
+ */
+function createNormalCheckbox(divId, data, dataDesc, dataValue, css, cssChecked, isRadio, clickFun='') {
+    if (!data || !dataDesc || !dataValue) throw new Error("createNormalCheckbox参数为空!");
+    let flag = true;
+    if (!divId) {
+        flag = false;
+    }
+    const radioArr = [];
+    const radioParaData = [];
+    if (!css) css = 'space-info-search-main-input-checkbox-item';
+    if (!cssChecked) cssChecked = 'space-info-search-main-input-checkbox-item-check';
+    data.forEach((item, index) => {
+        radioParaData.push({
+            radioCss: css,
+            radioCssChecked: cssChecked,
+            radioId: divId + index,
+            radioText: item[dataDesc],
+            radioValue: item[dataValue],
+            radioClickFun: clickFun,
+        });
+        radioArr.push(divId + index);
+    });
+    let divHtml = '';
+    radioParaData.forEach((item) => {
+        divHtml += `<div id="${item.radioId}" class="${item.radioCss}" group='${JSON.stringify(radioArr).replace(new RegExp(/( )/g),"")}' unchecked="${item.radioCss}" checked="${item.radioCssChecked}" itemValue="${item.radioValue}" clickFun="${item.radioClickFun}" onclick="clickCheckboxDefalut(this,${isRadio})">${item.radioText}</div>`;
+    });
+    function getCheckedArr () { // 获取已选中value数组
+        const checkedArr = [];
+        radioArr.forEach((item) => {
+            if ($('#'+item).hasClass(cssChecked)) {
+                checkedArr.push($('#'+item).attr('itemValue'));
+            }
+        });
+        return checkedArr;
+    }
+    if (flag) {
+        $('#'+divId).append(divHtml);
+        return getCheckedArr;
+    } else {
+        return {html:divHtml, getValue:getCheckedArr};
+    }
+}
+/**
+ * @author myf 2022-10-11
+ * 单/多选通用函数选项点击事件处理（仅供createNormalCheckbox调用）
+ * @param {Object} ele 选项元素
+ * @param {Boolean} isRadio 是否是单选,false为多选
+ * @returns 无
+ */
+function clickCheckboxDefalut (ele,isRadio) {
+    const curClass = $(ele).attr('class');
+    const checkedClass = $(ele).attr('checked');
+    const uncheckedClass = $(ele).attr('unchecked');
+    const group = JSON.parse($(ele).attr('group'));
+    const res = [];
+    if (isRadio) {
+        group.forEach((item)=>{
+            $('#'+item).attr('class',uncheckedClass);
+        });
+    }
+    if (curClass === checkedClass) {
+        $(ele).attr('class',uncheckedClass);
+    } else {
+        $(ele).addClass(checkedClass);
+    }
+    if (isRadio) {
+        res.push($(ele).attr('itemValue'));
+    } else {
+        group.forEach((item)=>{
+            if ($('#'+item).hasClass(cssChecked)) {
+                res.push($('#'+item).attr('itemValue'));
+            }
+        });
+    }
+    const clickFunStr = $(ele).attr('clickFun');
+    if (clickFunStr) {
+        const clickFun = eval(clickFunStr);
+        clickFun(ele, res);
+    }
+}
+</script>
+</html>

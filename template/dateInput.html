@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .date-div {
+            width: 100px;
+            height: 20px;
+            border: 1px solid lightblue;
+            cursor: pointer;
+        }
+        .date-input {
+            width: 140px;
+            border: 2px solid rgba(34,132,230,0.8);
+            background: rgba(14,53,92,1);
+            border-radius: 2px;
+            position: relative;
+            display: flex;
+            padding-left: 10px;
+            font-size: 16px;
+            line-height: 24px;
+            color: #fff;
+        }
+        .date-input::-webkit-calendar-picker-indicator {
+            position: absolute;
+            right: 0;
+            padding-left: calc(100% - 10px);
+            padding-right: 10px;
+            filter: invert(1);
+        }
+        .date-input::before {
+            content: attr(placeholder);
+        }
+        .date-input-selected::before {
+            content: "" !important;
+        }
+        .date-input::-webkit-datetime-edit-fields-wrapper {
+            margin-left: -200%;
+        }
+        .date-input-selected::-webkit-datetime-edit-fields-wrapper {
+            padding-left: 200%;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <!-- <input id="dateInput" type="date" /> -->
+        <input class="date-input" id="dateInput" placeholder="请选择日期" type="date" oninput="test(this)"/>
+    </div>
+</body>
+<script>
+    // const date = document.getElementById('dateInput');
+    // date.addEventListener('input', (e)=>{
+    //     let {target:{value}} = e;
+    //     if (value.length > 0) {
+    //         e.target.classList.add("date-input-selected");
+    //     } else {
+    //         e.target.classList.remove("date-input-selected");
+    //     }
+    // });
+    function test (e) {
+        let {value:value} = e;
+        if (value.length > 0) {
+            e.classList.add("date-input-selected");
+        } else {
+            e.classList.remove("date-input-selected");
+        }
+    }
+</script>
+<script src="./txtFileOperate.js"></script>
+</html>
+<!-- 
+/*  修改日历控件类型 */
+::-webkit-datetime-edit { padding: 1px;}  /*控制编辑区域的*/
+::-webkit-datetime-edit-fields-wrapper { background-color: #fff; }    /*控制年月日这个区域的*/
+::-webkit-datetime-edit-text { color: #333; padding: 0 .5em; }  /*这是控制年月日之间的斜线或短横线的*/
+::-webkit-datetime-edit-year-field { color: #333; }    /*控制年文字, 如2013四个字母占据的那片地方*/   
+::-webkit-datetime-edit-month-field { color: #333; }    /*控制月份*/
+::-webkit-datetime-edit-day-field { color: #333; }    /*控制具体日子*/
+::-webkit-inner-spin-button { visibility: hidden; }    /*这是控制上下小箭头的*/
+::-webkit-calendar-picker-indicator {      /*这是控制下拉小箭头的*/
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-shadow: inset 0 1px #fff, 0 1px #eee;
+    background-color: #eee;
+    background-image: -webkit-linear-gradient(top, #f0f0f0, #e6e6e6);
+    color: #666;
+}
+::-webkit-clear-button {    /*控制清除按钮*/
+} -->
