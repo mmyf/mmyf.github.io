@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+    <!-- <link rel="stylesheet" href="./anime/raw.css"> -->
+    <!-- <script src="./abilityToFigure.js"></script> -->
+</head>
+<body>
+    
+<div style="background-color: #37c65d;
+        width: 1000px;
+        height: 500px;display: grid;grid-template-rows:repeat(3,1fr);grid-template-columns: repeat(4,1fr);">
+    <div style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;" onclick="initHtmlTest()">1</div>
+    <div style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;" onclick="initHtmlTest2()">2</div>
+    <div style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;" onclick="clearT()">3</div>
+    <div style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;">4</div>
+    <div style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;">5</div>
+    <div style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;">6</div>
+    <div style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;">7</div>
+    <div style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;">8</div>
+    <div id="test" style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;">9</div>
+</div>
+</body>
+<script>
+let T = {};
+function initHtmlTest () {
+    const startTime = new Date();
+    console.log('DOM挂载start', startTime.getSeconds(), startTime.getMilliseconds());
+    const data = [];
+    for (let i = 0; i <= 100; i++) {
+        data.push({name: 'name' + i, key: 'key' + i, Text: 'aaaaa', history: i});
+    }
+    for (let i = 0; i <= 100; i++) {
+        const html = `<div id="test${i}" itemdata='${JSON.stringify(data)}'>test</div>`;
+        const test = document.querySelector('#test');
+        test.innerHTML += html;
+    }
+    const endTime = new Date();
+    console.log('DOM挂载end', endTime.getSeconds(), endTime.getMilliseconds());
+}
+
+function initHtmlTest2 () {
+    const startTime = new Date();
+    console.log('全局变量start2', startTime.getSeconds(), startTime.getMilliseconds());
+    const data = [];
+    for (let i = 0; i <= 100; i++) {
+        data.push({name: 'name' + i, key: 'key' + i, Text: 'aaaaa', history: i});
+    }
+    for (let i = 0; i <= 100; i++) {
+        const html = `<div id="test${i}">test</div>`;
+        T['test'+i] = {'itemdata': data};
+        const test = document.querySelector('#test');
+        test.innerHTML += html;
+    }
+    const endTime = new Date();
+    console.log('全局变量end2', endTime.getSeconds(), endTime.getMilliseconds());
+}
+// initHtmlTest ();
+
+function clearT () {
+    const test = document.querySelector('#test');
+    test.innerHTML = '';
+}
+
+function getDataTest () {
+    // 测试结果： 100次读取 52ms 1000次读取 530ms
+    const startTime = new Date();
+    console.log('start', startTime.getSeconds(), startTime.getMilliseconds());
+    for (let i = 0; i <= 1000; i++) {
+        const test = document.querySelector('#test1');
+        const itemdataStr = test.getAttribute('itemdata');
+        const itemdata = JSON.parse(itemdataStr);
+        console.log(itemdata, 'itemdata');
+    }
+    const endTime = new Date();
+    console.log('end', endTime.getSeconds(), endTime.getMilliseconds());
+}
+
+function getDataTest2 () {
+    // 测试结果： 100次读取 49ms 1000次读取 483ms
+    const startTime = new Date();
+    console.log('start', startTime.getSeconds(), startTime.getMilliseconds());
+    for (let i = 0; i <= 1000; i++) {
+        // const test = document.querySelector('#test1');
+        // const itemdataStr = test.getAttribute('itemdata');
+        // const itemdata = JSON.parse(itemdataStr);
+        const itemdata = T['test1']['itemdata'];
+        console.log(itemdata, 'itemdata2');
+    }
+    const endTime = new Date();
+    console.log('end', endTime.getSeconds(), endTime.getMilliseconds());
+}
+
+let a = {
+    "todayBlood": "今日用血",
+    "todayStat": "今日输血统计",
+    "developedBlood": "已发血",
+    "waitingBlood": "待发血",
+    "hematologyDepartment": "用血科室",
+    "adverseReaction": "不良反应",
+    "gametizedBlood": "已配血",
+    "emergencyBlood": "紧急备血",
+    "rescueBlood": "抢救备血",
+    "operaBlood": "手术备血",
+    "autologousBlood": "自体备血",
+    "bloodApplication": "输血申请",
+
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+}
+
+</script>
+</html>
