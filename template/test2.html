@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fenxi</title>
+    <style>
+        .title {
+            display: flex;
+            align-items: center;
+        }
+        .line-left {
+            width: 70px;
+            height: 1px;
+            border-bottom: 1px solid blue;
+        }
+        .line-right {
+            width: 200px;
+            height: 1px;
+            border-bottom: 1px solid blue;
+        }
+        .ss {
+            color: red;
+            transform: rotate(-90deg);
+        }
+        .sanjiao {
+            width: 0px;
+            height: 0px;
+            border-top: 100px solid white;
+            border-bottom: 100px solid #fff;
+            border-right: 100px solid red;
+            border-left: 0;
+            border-radius: 10px;
+        }
+        .slide-out-from-the-bottom-up {
+            width: 200px;
+            height: 0px;
+            background-color: blue;
+            transition: height 2s;
+        }
+    </style>
+</head>
+<body>
+    <div style="width:500px;height:700px;">
+        <div class="title">
+            <div></div>
+            <div class="line-left"></div>
+            <div>设备信息</div>
+            <div class="line-right"></div>
+        </div>
+        <div class="ss">
+            ➔
+        </div>
+        <span class="ss">➔</span>
+        <div class="sanjiao">
+
+        </div>
+        <div id="changeHeight" class="slide-out-from-the-bottom-up"></div>
+        <button onclick="test1()">改变高度</button>
+        <div id="test1"></div>
+        <div></div>
+    </div>
+</body>
+<script>
+    function changeHeight () {
+        const div = document.getElementById('changeHeight');
+        div.style.height = '300px';
+    }
+    
+    function test1 () {
+        let html = '<div>a'+
+        ' <div>b</div>'+
+        '</div>';
+        const test1 = document.getElementById('test1');
+        debugger;
+        test1.innerHTML = html;
+    }
+    
+</script>
+</html>

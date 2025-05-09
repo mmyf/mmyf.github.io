@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../common/Dictionary.js"></script>
+    <script src="./Graph.js"></script>
+    <!-- <script src="./PointToLine.js"></script> -->
+</head>
+<body>
+    <div></div>
+</body>
+<script>
+    // 使用无向图
+    var graph = new Graph();
+    var myVertices = ['A','B','C','D','E','F','G','H','I'];
+    graph.addVertex(myVertices);
+    graph.addEdge('A', 'B', 4);
+    graph.addEdge('A', 'C', 5);
+    graph.addEdge('A', 'D', 6);
+    graph.addEdge('C', 'D', 7);
+    graph.addEdge('C', 'G', 4);
+    graph.addEdge('D', 'G', 2);
+    graph.addEdge('D', 'H', 2);
+    graph.addEdge('B', 'E', 1);
+    graph.addEdge('B', 'D', 1);
+    graph.addEdge('B', 'F', 4);
+    graph.addEdge('B', 'G', 6);
+    graph.addEdge('E', 'I', 9);
+    graph.addEdge('E', 'G', 1);
+    console.log(graph);
+    const res = graph.getShortestPath('A','G');
+    console.log(res);
+
+    // const res = pointToLine([0,0,0],[4,0,0],[2,2,0]);
+    // console.log(res);
+</script>
+</html>

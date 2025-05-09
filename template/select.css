@@ -1,0 +1,181 @@
+.page-set-form-date-input {
+    width: 100%;
+    position: relative;
+    display: flex;
+    padding-left: .5rem;
+    font-size: .7rem;
+    line-height: 1.2rem;
+    border: .1rem solid rgba(34,132,230,0.8);
+    background: rgba(14,53,92,1);
+    border-radius: .1rem;
+    color: #fff;
+    box-sizing: border-box;
+}
+.page-set-form-date-input::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 0;
+    padding-left: calc(100% - .5rem);
+    padding-right: .5rem;
+    filter: invert(1);
+}
+.page-set-form-date-input::before {
+    content: attr(placeholder);
+}
+.page-set-form-date-input-selected::before {
+    content: "" !important;
+}
+.page-set-form-date-input::-webkit-datetime-edit-fields-wrapper {
+    margin-left: -200%;
+}
+.page-set-form-date-input-selected::-webkit-datetime-edit-fields-wrapper {
+    padding-left: 200%;
+}
+.page-set-form-default-input {
+    width:100%;
+    height:1.2rem;
+    padding-left:0.5rem;
+    color:#fff;
+    border: 0.05rem solid rgba(77,152,222,0.8);
+    background: rgba(14,53,92,0.4);
+    border-radius: 0.1rem 0.1rem 0.1rem 0.1rem;
+    outline:none;
+    box-sizing:border-box;
+}
+.page-set-form-desc-panel {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.page-set-form-desc-label {
+    margin-right:0.4rem;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color:#fff;
+    float:right;
+}
+
+.page-set-form-select-input {
+    width: 100%;
+    height: 1.1rem;
+    border: 0.05rem solid rgba(77,152,222,0.8);
+    padding-left: 0.25rem;
+    background: rgba(14,53,92,1);
+    color: #fff;
+    box-sizing: border-box;
+    cursor: pointer;
+    outline: none;
+}
+.page-set-form-select-options {
+    position: absolute;
+    width: 100%;
+    max-height: 10rem;
+    padding: 0;
+    margin: 0;
+    border: 0.05rem solid rgba(77,152,222,0.8);
+    background: rgba(14,53,92,1);
+    color: #fff;
+    box-sizing: border-box;
+    list-style: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow: scroll;
+    z-index: 99;
+}
+.page-set-form-select-options::-webkit-scrollbar {display:none}
+.page-set-form-select-option {
+    width: 100%;
+    padding-left: 0.25rem;
+    background: rgba(14,53,92,1);
+    color: #fff;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.page-set-form-select-option:hover {
+    background-color: lightblue;
+    color: rgba(14,53,92,1);
+}
+.page-set-form-select-option-checked {
+    background-color: lightskyblue;
+    color: rgba(14,53,92,1);
+}
+
+.page-set-form-mulselect-tagbox {
+    max-width: 70%;
+    height: 100%;
+    padding: 0;
+    box-sizing: border-box;
+    position: absolute;
+    overflow: hidden;
+
+}
+
+.page-set-form-mulselect-tag {
+    height: 100%;
+    margin-left: 6px;
+    padding: 4px;
+    /* border: 8px solid rgba(14,53,92,1); */
+    border: none;
+    border-radius: .2rem;
+    background-color: rgb(59, 103, 148);
+    color: #fff;
+    box-sizing: border-box;
+    user-select: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    /* box-shadow: 0 0 4px 4px rgb(127, 219, 250) inset; */
+}
+.page-set-form-mulselect-tag span {
+    cursor: pointer;
+}
+.page-set-form-mulselect-input {
+    width: 100%;
+    min-width: 30%;
+    height: 100%;
+    border: none;
+    padding-left: 0.25rem;
+    background: rgba(14,53,92,1);
+    color: #fff;
+    box-sizing: border-box;
+    cursor: pointer;
+    outline: none;
+}
+
+.page-set-form-mulselect-tagbox-more {
+    float: right;
+    height: 100%;
+    margin-left: 6px;
+    padding: 0 4px;
+    /* border: 8px solid rgba(14,53,92,1); */
+    border: none;
+    border-radius: .2rem;
+    background-color: rgb(59, 103, 148);
+    color: #fff;
+    user-select: none;
+    box-sizing: border-box;
+    display: none;
+    cursor: pointer;
+}
+
+.page-set-form-mulselect-more-tagbox {
+    position: absolute;
+    width: 100%;
+    max-height: 10rem;
+    padding: .5rem;
+    margin: 0;
+    border: 0.05rem solid rgba(77,152,222,0.8);
+    background: rgba(14,53,92,1);
+    color: #fff;
+    box-sizing: border-box;
+    list-style: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow: scroll;
+    z-index: 98;
+}
+.page-set-form-mulselect-more-tagbox::-webkit-scrollbar {display:none}
