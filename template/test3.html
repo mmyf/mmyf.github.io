@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Menu</title>
+    <style>
+        .tree-node {
+            margin-left: 20px;
+        }
+        .tree-node-header {
+            display: flex;
+            align-items: center;
+        }
+        .tree-node-header span {
+            margin-right: 10px;
+        }
+        .tree-node-children {
+            display: none;
+        }
+        .tree-node.expanded .tree-node-children {
+            display: block;
+        }
+        .tree-node-buttons {
+            margin-left: auto;
+        }
+        .tree-node-buttons button {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button onclick="expandAll()">全部展开</button>
+        <button onclick="collapseAll()">全部收起</button>
+        <input type="text" id="searchInput" placeholder="搜索目录/按钮名称" oninput="searchTree()">
+    </div>
+    <div id="treeContainer"></div>
+
+    <script src="tree.js"></script>
+</body>
+</html>

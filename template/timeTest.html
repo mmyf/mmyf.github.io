@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button {
+            width: 160px;
+            height: 40px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div>
+            <button onclick="addOper('synchronizationOper')">synchronizationOper</button>
+            <button onclick="addOper('createPromise')">createPromise</button>
+            <button onclick="addOper('createTimeout')">createTimeout</button>
+            <!-- <button onclick="addOper('createPromiseTimeout')">createPromiseTimeout</button>
+            <button onclick="addOper('createTimeoutPromise')">createTimeoutPromise</button> -->
+            <button onclick="doOper()">submit</button>
+            <button onclick="clearOper()">clear</button>
+        </div>
+        <div id="operPanel"></div>
+    </div>
+</body>
+<script>
+    let operArr = [];
+    const operPanel = document.getElementById('operPanel');
+    function createPromise (index) {
+        Promise.resolve().then(()=>{
+            operPanel.innerHTML += 'promise!' + index + '->\n';
+        });
+    }
+    function createTimeout (index) {
+        setTimeout(()=>{
+            operPanel.innerHTML += 'timeout!' + index + '->\n';
+        },0);
+    }
+    function createPromiseTimeout (index) {
+        Promise.resolve().then(()=>{
+            operPanel.innerHTML += 'promiseTimeout![0]' + index + '->\n';
+            setTimeout(()=>{
+                operPanel.innerHTML += 'promiseTimeout![1]' + index + '->\n';
+            },0);
+        });
+    }
+    function createTimeoutPromise (index) {
+        operPanel.innerHTML += 'timeoutPromise![0]' + index + '->\n';
+        setTimeout(()=>{
+            Promise.resolve().then(()=>{
+                operPanel.innerHTML += 'timeoutPromise![1]' + index + '->\n';
+            });
+        },0);
+    }
+    function userClick () {
+        console.log('userClick!');
+    }
+    function synchronizationOper (index) {
+        operPanel.innerHTML += 'synchronizationOper!' + index + '->\n';
+    }
+    function addOper (oper) {
+        operArr.push(oper);
+        operPanel.innerHTML += oper + '->\n';
+    }
+    function doOper () {
+        operPanel.innerHTML += '<br>';
+        operArr.forEach((item, index)=>{
+            const func = eval(item);
+            func(index);
+        });
+    }
+    function clearOper () {
+        operArr = [];
+        operPanel.innerHTML = '';
+    }
+</script>
+</html>

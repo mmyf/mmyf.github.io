@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+var maxSubarraySumCircular = function(nums) {
+    // tanxin?
+    // let n = nums.length;
+    let min = Math.min(...nums);
+    if (min >= 0) {
+        return nums.reduce((a,b)=>{return a+b});
+    } else {
+        let minIndex = nums.indexOf(min);
+        nums.splice(minIndex,1);
+    }
+    let curMax = Math.max(...nums);
+    while(curMax < checkMax(nums)) {
+
+        curMax = checkMax(nums);
+    }
+};
+
+function checkMax (nums) {
+    let min = Math.min(...nums);
+    if (min >= 0) {
+        return nums.reduce((a,b)=>{return a+b});
+    } else {
+        let minIndex = nums.indexOf(min);
+        // nums.splice(minIndex,1);
+        let start = nums.slice(0,minIndex);
+        let end = nums.slice(minIndex);
+        let startSum = start.reduce((a,b)=>{return a+b});
+        let endSum = end.reduce((a,b)=>{return a+b});
+        if (startSum > endSum) {
+            nums = start;
+            return startSum;
+        } else {
+            nums = end;
+            return endSum;
+        }
+    }
+}
+
+function arr2Tree (arr,root={},isRoot=true) {
+    let numa = null;
+    if (isRoot) {
+        numa = arr.shift();
+    }
+    const numb = arr.shift();
+    const numc = arr.shift();
+    if (Number.isInteger(numa)) {
+        root.val = numa;
+    }
+    if (Number.isInteger(numb)) {
+        root.left = {
+            val: numb
+        };
+        arr2Tree (arr,root.left,false);
+    }
+    if (Number.isInteger(numc)) {
+        root.right = {
+            val: numc
+        };
+        arr2Tree (arr,root.right,false);
+    }
+    return root;
+}
+// const tree = arr2Tree([0,3,1,null,null,null,1,null,0]);
+// const tree = arr2Tree([4,0,null,null,0,null,0]);
+// console.log('finish',calcCoins(tree));
+console.log('finish',maxSubarraySumCircular([2,-1,3,-2]));
+
+</script>

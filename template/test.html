@@ -6,110 +6,172 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>test</title>
     <!-- <link rel="stylesheet" href="./anime/raw.css"> -->
-    <script src="./abilityToFigure.js"></script>
+    <!-- <script src="./abilityToFigure.js"></script> -->
 </head>
 <body>
-    <!-- <div id="test1" style="width: 110px; height: 40px;background: rgba(48,152,250,0.4);">
-        <div style="width: 110px; height:1px;background: linear-gradient(to right, #2284E6 0%, rgba(34,132,230,0.1) 100%);"></div>
-        <div style="width: 110px; height:37px;display: flex;">
-            <div style="width: 1px; height:37px;background: linear-gradient(to bottom, #2284E6 0%, rgba(34,131,229,0) 100%);"></div>
-            <div style="width: 40px;text-align: center;height: 37px;line-height: 37px;">logo</div>
-            <div style="width: 70px;text-align: center;height: 37px;line-height: 37px;">门诊楼</div>
-        </div>
-        <div style="display: flex;width: 110px;height: 2px;">
-            <div style="height: 2px;display: flex;">
-                <div style="width: 2px;height:2px;margin-right: 2px;background: #2284E6;"></div>
-                <div style="width: 2px;height:2px;margin-right: 2px;background: #2284E6;"></div>
-                <div style="width: 2px;height:2px;margin-right: 2px;background: #2284E6;"></div>
-            </div>
-            <div style="width: 100%; height: 2px;background: linear-gradient(to left, #2284E6 0%, rgba(34,132,230,0.1) 100%);"></div>
-        </div>
-    </div> -->
-    <!-- <div>abcdefg</div> -->
-    <div id="testc" style="width: 100%;height: 720px;">
-        <!-- <canvas id="canvas" width="1000" height="700"></canvas> -->
-    </div>
     
+<div style="background-color: #37c65d;
+        width: 1000px;
+        height: 500px;display: grid;grid-template-rows:repeat(3,1fr);grid-template-columns: repeat(4,1fr);">
+    <div style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;" onclick="initHtmlTest()">1</div>
+    <div style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;" onclick="initHtmlTest2()">2</div>
+    <div style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;" onclick="clearT()">3</div>
+    <div style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;">4</div>
+    <div style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;">5</div>
+    <div style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;">6</div>
+    <div style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;">7</div>
+    <div style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;">8</div>
+    <div id="test" style="width: 80px;height: 80px;padding: 20px; background-color: aqua;background-clip: content-box;">9</div>
+</div>
 </body>
 <script>
-//  * mapData {
-//  *  {String} mapID: 'figure' 确保唯一有效
-//  *  {Number} width: 500  注意是数字，canvas默认单位是px
-//  *  {Number} height: 500
-//  *  {Number} angle: 60 旋转角度
-//  *  {Array<Number>} lineWidth: [1, 2] 线条粗细,前为底图粗细，后为维度数据线条粗细
-//  *  {String} lineColor: '#fff' 底图线条颜色
-//  *  {Number} dimension: 5 维度（>=3）
-//  *  {Array} dimensionDesc: ['体力','耐力','力量','敏捷','智力'] 维度描述
-//  *  {Array} dimensionValue: ['physical','endurance','power','agile','intelligence'] 维度字段
-//  *  {Array<Number>} || {Number} dimensionScale: [20,10,5,10,10] 维度字段数据和深度的比例，如例physical设1.1值为22
-//  *                                              2   所有维度比例都为2
-//  *  {Array} || {String} dimensionUnit: ['点','张','元','个','台'] 维度字段数据单位，如上例physical值为‘22点’
-//  *                                      '米'  所有维度单位都为米
-//  *  {String} dimensionDescColor: '#fff' 维度描述字体颜色
-//  *  {String} dimensionDescStyle: '30px 微软雅黑' 维度描述字体  空格前为文字大小，空格后为字体类型
-//  *  {Number} deep: 4 深度
-//  *  {Number} deepGap: 50 深度间隙，应满足deepGap*deep < width/2,注意给文字留出空间
-//  *  {Array} data: [
-//  *      {
-//  *          {String} name: 'alysa', 数据名
-//  *          {Number} physical: 1.1,
-//  *          {Number} endurance: 2.5,
-//  *          {Number} power: 2.3,
-//  *          {Number} agile: 3.1,
-//  *          {Number} intelligence：4, 应<=deep深度,上同
-//  *          {String} color: '#fff', 折线颜色，默认白色
-//  *      },
-//  *  ] 图数据
-//  *  {Boolean} showData: true 鼠标移至点位是否展示数值
-//  * }
-const data = [
-    {
-        name: '',
-        physical: 1.2,
-        endurance: 2.3,
-        power: 1.5,
-        agile: 3.1,
-        intelligence: 4,
-        color: 'red',
-    },
-    {
-        name: '',
-        physical: 2.2,
-        endurance: 0.3,
-        power: 3.5,
-        agile: 1.1,
-        intelligence: 1,
-        color: 'yellow',
-    },{
-        name: '',
-        physical: 3.2,
-        endurance: 3.3,
-        power: 2.5,
-        agile: 2.4,
-        intelligence: 0,
-        color: 'blue',
-    },
-];
-const mapData = {
-    mapID: 'myMap',
-    width: 700,
-    height: 700,
-    angle: 0,
-    lineWidth: [1, 5],
-    lineColor: '#000',
-    dimension: 5,
-    dimensionDesc: ['体力','耐力','力量','敏捷','智力'],
-    dimensionValue: ['physical','endurance','power','agile','intelligence'],
-    dimensionScale: 100,
-    dimensionUnit: '点',
-    dimensionDescColor: '#000',
-    dimensionDescStyle: '20px 微软雅黑',
-    deep: 4,
-    deepGap: 50,
-    data: data,
-    showData: true,
-};
-createRadarMap('testc', mapData);
+let T = {};
+function initHtmlTest () {
+    const startTime = new Date();
+    console.log('DOM挂载start', startTime.getSeconds(), startTime.getMilliseconds());
+    const data = [];
+    for (let i = 0; i <= 100; i++) {
+        data.push({name: 'name' + i, key: 'key' + i, Text: 'aaaaa', history: i});
+    }
+    for (let i = 0; i <= 100; i++) {
+        const html = `<div id="test${i}" itemdata='${JSON.stringify(data)}'>test</div>`;
+        const test = document.querySelector('#test');
+        test.innerHTML += html;
+    }
+    const endTime = new Date();
+    console.log('DOM挂载end', endTime.getSeconds(), endTime.getMilliseconds());
+}
+
+function initHtmlTest2 () {
+    const startTime = new Date();
+    console.log('全局变量start2', startTime.getSeconds(), startTime.getMilliseconds());
+    const data = [];
+    for (let i = 0; i <= 100; i++) {
+        data.push({name: 'name' + i, key: 'key' + i, Text: 'aaaaa', history: i});
+    }
+    for (let i = 0; i <= 100; i++) {
+        const html = `<div id="test${i}">test</div>`;
+        T['test'+i] = {'itemdata': data};
+        const test = document.querySelector('#test');
+        test.innerHTML += html;
+    }
+    const endTime = new Date();
+    console.log('全局变量end2', endTime.getSeconds(), endTime.getMilliseconds());
+}
+// initHtmlTest ();
+
+function clearT () {
+    const test = document.querySelector('#test');
+    test.innerHTML = '';
+}
+
+function getDataTest () {
+    // 测试结果： 100次读取 52ms 1000次读取 530ms
+    const startTime = new Date();
+    console.log('start', startTime.getSeconds(), startTime.getMilliseconds());
+    for (let i = 0; i <= 1000; i++) {
+        const test = document.querySelector('#test1');
+        const itemdataStr = test.getAttribute('itemdata');
+        const itemdata = JSON.parse(itemdataStr);
+        console.log(itemdata, 'itemdata');
+    }
+    const endTime = new Date();
+    console.log('end', endTime.getSeconds(), endTime.getMilliseconds());
+}
+
+function getDataTest2 () {
+    // 测试结果： 100次读取 49ms 1000次读取 483ms
+    const startTime = new Date();
+    console.log('start', startTime.getSeconds(), startTime.getMilliseconds());
+    for (let i = 0; i <= 1000; i++) {
+        // const test = document.querySelector('#test1');
+        // const itemdataStr = test.getAttribute('itemdata');
+        // const itemdata = JSON.parse(itemdataStr);
+        const itemdata = T['test1']['itemdata'];
+        console.log(itemdata, 'itemdata2');
+    }
+    const endTime = new Date();
+    console.log('end', endTime.getSeconds(), endTime.getMilliseconds());
+}
+
+let a = {
+    "todayBlood": "今日用血",
+    "todayStat": "今日输血统计",
+    "developedBlood": "已发血",
+    "waitingBlood": "待发血",
+    "hematologyDepartment": "用血科室",
+    "adverseReaction": "不良反应",
+    "gametizedBlood": "已配血",
+    "emergencyBlood": "紧急备血",
+    "rescueBlood": "抢救备血",
+    "operaBlood": "手术备血",
+    "autologousBlood": "自体备血",
+    "bloodApplication": "输血申请",
+
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+    "todayBlood": "今日用血",
+}
+
 </script>
 </html>

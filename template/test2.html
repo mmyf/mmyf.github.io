@@ -39,6 +39,250 @@
             background-color: blue;
             transition: height 2s;
         }
+        .treeOne {
+      cursor: pointer;
+    }
+ 
+    .treeTitle {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      display: flex;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      align-items: center;
+ 
+    }
+ 
+    .treeTitle.subutton.active:before {
+      transform: rotate(90deg);
+    }
+ 
+    .haveSub>.treeTitle.subutton:before {
+      content: '';
+      width: 0;
+      height: 0;
+      display: inline-block;
+      justify-content: center;
+      margin-right: 5px;
+      border-left: 6px solid #afafaf;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+    }
+ 
+    .treeTitle:hover {
+      background: #f5f7fa;
+    }
+ 
+    .treeOne-item {
+      display: none;
+      transition: all 2s;
+    }
+ 
+    #searchInput {
+      height: 30px;
+      line-height: 30px;
+      font-size: 15px;
+ 
+    }
+    </style>
+</head>
+<body>
+    <div style="width:500px;height:700px;">
+
+        <div id="showTree"></div>
+    </div>
+</body>
+<script>
+
+let tree = [
+    {
+      id: '1',
+      label: '前端入门',
+      children: [
+        {
+          id: '1-1',
+          label: '前端中级'
+        },
+        {
+          id: '1-2',
+          label: '前端高级'
+        },
+        {
+          id: '1-3',
+          label: '前端架构'
+        },
+      ]
+    },
+    {
+      id: '2',
+      label: '前端开发',
+      children: [
+        {
+          id: '2-1',
+          label: 'reactJS',
+          children: [
+            {
+              id: '2-1-1',
+              label: 'react-native',
+              children: [
+                {
+                  id: '2-1-1-1',
+                  label: 'react-REDUX'
+                },
+                {
+                  id: '2-1-1-2',
+                  label: 'react-ROUTER'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: '2-2',
+          label: 'vueJS',
+          children: [
+            {
+              id: '2-2-1',
+              label: 'vuex'
+            }
+          ]
+        },
+        {
+          id: '2-3',
+          label: 'angularJS'
+        }
+      ]
+    },
+    {
+      id: '3',
+      label: '前端发展'
+    }
+  ], seachId = '';
+function createTree(data, num = 0, path = []) {
+    const treeList = createDom('treeFather')
+    data.forEach(li => {
+      const treeItem = createDom('treeOne')
+      const treeItemTitle = createDom('treeTitle', li.id)
+      treeItemTitle.style.paddingLeft = `${18 * num}px`
+      treeItemTitle.innerText = li.label
+      treeItem.appendChild(treeItemTitle)
+      treeItemTitle.onclick = (e) => {
+        if (e.target.classList.contains('subutton')) {
+          if (e.target.classList.contains('active')) {
+            e.target.classList.remove('active')
+            e.target.nextSibling.style.display = 'none'
+          } else {
+            e.target.classList.add('active')
+            e.target.nextSibling.style.display = 'block'
+          }
+        }
+        selectOnclick(li, [...path, li], e)
+      }
+      if (li.children) {
+        treeItem.classList.add('haveSub')
+        treeItemTitle.classList.add('subutton')
+        const subTree = createDom('treeOne-item')
+        subTree.appendChild(createTree(li.children, num + 1, [...path, li]))
+        treeItem.appendChild(subTree)
+      }
+      treeList.appendChild(treeItem)
+    })
+    return treeList
+  }
+ 
+function selectOnclick(item, path, e) {
+    if (!item.children) {
+      console.log(path, e)
+      alert(`您已选择：【${item.label}】`)
+    }
+}
+function createDom(val, id) {
+    let div = document.createElement('div')
+    div.className = val
+    if (val === 'treeTitle') {
+      div.id = id
+    }
+    return div;
+}
+let treeList = createTree(tree)
+document.getElementById('showTree').appendChild(treeList)
+ 
+  function searchText(val, data) {
+    data.forEach(element => {
+      if (element.label === val) {
+        console.log('(element.id===>', element.id)
+        document.getElementById(element.id).style.color = 'blue'
+        document.getElementById(element.id).style.background = '#88aee6'
+        seachId = element.id
+        return;
+      }
+      if (element.children) {
+        searchText(val, element.children)
+      }
+    });
+  }
+  function onSearch(e, type) {
+    if (seachId) {
+      // 清空搜索上次的样式
+      document.getElementById(seachId).style.color = ''
+      document.getElementById(seachId).style.background = ''
+    }
+ 
+    if (type == '01') {
+      searchText(e.target.value, tree)
+    } else if (type == '02') {
+      if (e.keyCode == 13) {
+        searchText(e.target.value, tree)
+      }
+    }
+  }
+    
+</script>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fenxi</title>
+    <style>
+        .title {
+            display: flex;
+            align-items: center;
+        }
+        .line-left {
+            width: 70px;
+            height: 1px;
+            border-bottom: 1px solid blue;
+        }
+        .line-right {
+            width: 200px;
+            height: 1px;
+            border-bottom: 1px solid blue;
+        }
+        .ss {
+            color: red;
+            transform: rotate(-90deg);
+        }
+        .sanjiao {
+            width: 0px;
+            height: 0px;
+            border-top: 100px solid white;
+            border-bottom: 100px solid #fff;
+            border-right: 100px solid red;
+            border-left: 0;
+            border-radius: 10px;
+        }
+        .slide-out-from-the-bottom-up {
+            width: 200px;
+            height: 0px;
+            background-color: blue;
+            transition: height 2s;
+        }
     </style>
 </head>
 <body>

@@ -20,6 +20,7 @@ function Graph() {
         }
     }
 
+    
     //向图中添加顶点之间的边
     this.addEdge = function (v,w,weight) {
         this.adjList.get(v).push({pathTo:w,weight:weight});//将w加入到v的邻接表中

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div id="test"></div>
+</body>
+</html>
+<script>
+    accessControlTest();
+function accessControlTest () {
+    console.log('accessControlTest1234654986');
+    const accessStatusInfo = {
+        "authDoorList": [{"doorIndexCode": "a38408847d1a4120b5587ae669291574","doorState": 3}],
+        "noAuthDoorIndexCodeList": []
+    };
+    const accessEventsInfo = {
+    "pageSize": 10,
+    "list": [
+    //   {
+    //     "eventId": "17048a5d2650c9ed1a06aa02eb73c39d",
+    //     "eventName": "acs.acs.eventType.failForFace",
+    //     "eventTime": "2023-09-07T11:16:00.000+08:00",
+    //     "personId": null,
+    //     "cardNo": null,
+    //     "personName": null,
+    //     "orgIndexCode": null,
+    //     "orgName": null,
+    //     "doorName": "洁净电梯四层_门_1",
+    //     "doorIndexCode": "a38408847d1a4120b5587ae669291574",
+    //     "doorRegionIndexCode": "6b422e87-3dd0-4176-aae6-6493c8e0d486",
+    //     "picUri": "/pic?0dbc00=b5a0ip-3eo691-e90*3o5=3=5879*0l8655460156*9t1=6*1ps==110b*=1164*f6b075815-b516ee-5*l118od02782=003",
+    //     "svrIndexCode": "38238fdf-ba06-454f-847a-aaad25535dd8",
+    //     "eventType": 197151,
+    //     "inAndOutType": 1,
+    //     "readerDevIndexCode": "3776c9a52787481f9505cd576558295b",
+    //     "readerDevName": "读卡器_1",
+    //     "devIndexCode": "f0eb456bdb6f431485013e2c4f6b9e07",
+    //     "devName": "洁净电梯四层",
+    //     "identityCardUri": null,
+    //     "receiveTime": "2023-09-07T11:16:00.893+08:00",
+    //     "jobNo": null,
+    //     "studentId": null,
+    //     "certNo": null
+    //   },
+      {
+        "eventId": "9118d4df267212ab271aca13e9ca86c6",
+        "eventName": "acs.acs.eventType.successCard",
+        "eventTime": "2023-08-23T14:59:07.000+08:00",
+        "personId": "7404376ace8747aba4dec1717404671b",
+        "cardNo": "17941414",
+        "personName": "石杨",
+        "orgIndexCode": "d39ced08-b111-4280-b8fa-6f575fef0f37",
+        "orgName": "西安交通大学口腔医院/行政后勤/总务部",
+        "doorName": "洁净电梯四层_门_1",
+        "doorIndexCode": "a38408847d1a4120b5587ae669291574",
+        "doorRegionIndexCode": "6b422e87-3dd0-4176-aae6-6493c8e0d486",
+        "picUri": null,
+        "svrIndexCode": null,
+        "eventType": 198914,
+        "inAndOutType": 1,
+        "readerDevIndexCode": "3776c9a52787481f9505cd576558295b",
+        "readerDevName": "读卡器_1",
+        "devIndexCode": "f0eb456bdb6f431485013e2c4f6b9e07",
+        "devName": "洁净电梯四层",
+        "identityCardUri": null,
+        "receiveTime": "2023-08-23T14:59:09.287+08:00",
+        "jobNo": "6508",
+        "studentId": null,
+        "certNo": "6508"
+      },
+      {
+        "eventId": "1d2a18ace9c083261808e57f604e6e92",
+        "eventName": "acs.acs.eventType.successCard",
+        "eventTime": "2023-08-23T14:58:45.000+08:00",
+        "personId": "7404376ace8747aba4dec1717404671b",
+        "cardNo": "17941414",
+        "personName": "石杨",
+        "orgIndexCode": "d39ced08-b111-4280-b8fa-6f575fef0f37",
+        "orgName": "西安交通大学口腔医院/行政后勤/总务部",
+        "doorName": "洁净电梯四层_门_1",
+        "doorIndexCode": "a38408847d1a4120b5587ae669291574",
+        "doorRegionIndexCode": "6b422e87-3dd0-4176-aae6-6493c8e0d486",
+        "picUri": null,
+        "svrIndexCode": null,
+        "eventType": 198914,
+        "inAndOutType": 1,
+        "readerDevIndexCode": "3776c9a52787481f9505cd576558295b",
+        "readerDevName": "读卡器_1",
+        "devIndexCode": "f0eb456bdb6f431485013e2c4f6b9e07",
+        "devName": "洁净电梯四层",
+        "identityCardUri": null,
+        "receiveTime": "2023-08-23T14:58:46.415+08:00",
+        "jobNo": "6508",
+        "studentId": null,
+        "certNo": "6508"
+      }
+    ],
+    "total": 278,
+    "totalPage": 28,
+    "pageNo": 1
+};
+    const accessPictureInfo = {url:'111'}
+    createAccessControlInfoCard (accessStatusInfo, accessEventsInfo, accessPictureInfo);
+}
+
+function createAccessControlInfoCard (accessStatusInfo, accessEventsInfo, accessPictureInfo) {
+    let isAlarm = false;
+    const accessAlarmInfo = accessEventsInfo.list.filter(eventInfo=>{
+        return !eventInfo.personId;
+    });
+    let lastestAlarmInfo;
+    if (accessAlarmInfo.length) {
+        isAlarm = true;
+        lastestAlarmInfo = accessAlarmInfo[0];
+    }
+    const curDoor = accessStatusInfo.noAuthDoorIndexCodeList.length ? accessStatusInfo.noAuthDoorIndexCodeList[0] : accessStatusInfo.authDoorList[0];
+    const doorState = curDoor.doorState;
+    const listItemObj = {
+        headViewFlag:'Y',
+        headStyle:'',
+        itemStyles:[
+            {
+                styles:'width:4rem;height:1.5rem;line-height:1.5rem;margin-right:0.5rem;text-align:center;font-size:0.6rem;font-weight:400;',
+                listTitle: '姓名',
+                key:'personName',
+                clickFun:'',
+            },
+            {
+                styles:'width:4rem;height:1.5rem;line-height:1.5rem;margin-right:0.5rem;text-align:center;font-size:0.6rem;font-weight:400;',
+                listTitle: '工号',
+                key:'cardNo',
+                clickFun:'',
+            },
+            {
+                styles:'width:8rem;height:1.5rem;line-height:1.5rem;text-align:center;font-size:0.6rem;font-weight:400;',
+                listTitle: '通行时间',
+                key:'eventTime',
+                clickFun:'',
+            },
+        ],
+        listStyle:'background-color: rgb(19 56 101);',
+        widgetPanelID:'inventoryRoom'+curDoor.doorIndexCode,
+        id:'inventoryRoom'+curDoor.doorIndexCode,
+        widgetStyle:'height:8rem;overflow:unset;',
+        evenStyleInfo:'background-color:rgba(33,126,214, 0.5);',
+        oddStyleInfo:'background-color:rgba(25,46,83, 0.6);',
+        clickFun:'',
+        widgetCondition:[],
+        widgetKey:'inventoryRoom'+curDoor.doorIndexCode,
+        listDateNode:'',
+    };
+    // const listHtml = style_table_base('',listItemObj);
+    let html = `<div style='width: 12rem;display: flex;flex-direction: column;align-items: center;'>`;
+    html += `<div style='background-color:rgba(10 47 102/ 0.8);border-radius:0.2rem;width:12rem;padding:0.5rem;color:#fff;'>`
+    html += `<div style='height:1.5rem;line-height:1.5rem;text-align:center;font-weight:600;'>门禁信息</div>`;
+    if (isAlarm) { // 是否是警报
+        html += `<div style='height:6rem;display:flex;'>`;
+        html += `<div style="width:4rem;height:6rem;background-image:url(${''}${accessPictureInfo.url});background-size:100%;background-repeat: no-repeat;"></div>`; // 抓拍图片
+        html += `<div style="width:6rem;height:6rem;background-color:rgb(18 48 94);">`; // 警报信息
+        html += `<div style="width:6rem;height:1rem;display:flex;">`;
+        html += `<div style="width:1rem;height:1rem;background-image:url(${''}${accessPictureInfo.url});background-size:100%;background-repeat: no-repeat;"></div>`;
+        html += `<div style="width:3rem;height:1rem;color:red;">非法闯入</div>`;
+        html += createSwitchButton();
+        html += `</div>`;
+        html += `<div style='height:1rem;line-height:1rem;'><span style='color:#fff;'>姓名：</span><span>${lastestAlarmInfo.personName}</span></div>`;
+        html += `<div style='height:1rem;line-height:1rem;'><span style='color:#fff;'>人员类型：</span><span>${lastestAlarmInfo.personName}</span></div>`;
+        html += `<div style='height:1rem;line-height:1rem;'><span style='color:#fff;'>部门：</span><span>${lastestAlarmInfo.orgName}</span></div>`;
+        html += `<div style='height:1rem;line-height:1rem;'><span style='color:#fff;'>位置：</span><span>${lastestAlarmInfo.doorName}</span></div>`;
+        html += `<div style='height:1rem;line-height:1rem;'><span style='color:#fff;'>时间：</span><span>${timeFormat(lastestAlarmInfo.eventTime)}</span></div>`;
+        html += `</div>`;
+        // html += listHtml;
+        html += `</div>`;
+    } else {
+        html += `<div style='height:4rem;font-size: 0.7rem;display:flex;'>`;
+        html += `<div style="width:4.5rem;height:3rem;margin-right:1rem;padding: 0.5rem;background-color:rgb(18 48 94);">`;
+        html += `<div style="height:1.5rem;line-height:1.5rem;color:#58a2e6;">门禁状态</div>`;
+        if (doorState === 1 || doorState === 2) {
+            html += createSwitchButton();
+        } else if (doorState === 3) {
+            html += `<div style="width:2rem;height:1rem;margin-top:0.5rem;line-height:1rem;color:rgb(232 166 56);background-color:rgb(232 166 56 / 59%);text-align: center;">离线</div>`;
+        }
+        html += `</div>`;
+        html += `<div style="width:4.5rem;height:3rem;padding: 0.5rem;background-color:rgb(18 48 94);">`;
+        html += `<div style="height:1.5rem;line-height:1.5rem;color:#58a2e6;">门禁位置</div>`;
+        html += `<div style="height:1.5rem;line-height:1.5rem;">门禁位置值</div>`;
+        html += `</div>`;
+        html += `</div>`;
+    }
+    html += `</div>`;
+    html += `<div style="width:2rem;height:2rem;margin-top:0.5rem;border-radius:1rem;background-color:rgba(10 47 102/ 0.8);">`;
+    html += `<div style="width:2rem;height:2rem;background-image:url(${''}./air-fan.png);background-size:100%;background-repeat: no-repeat;"></div>`;
+    html += `</div>`;
+    html += `</div>`;
+    // $('#div2d').append($(html));
+    const div = document.querySelector('#test');
+    div.innerHTML = html;
+    // style_table_base(accessEventsInfo,listItemObj);
+}
+/**
+ * @description 创建开关
+ * @param {Object} buttonConfig 开关配置项
+ * @return 无
+ * @authors myf 2023-10-12
+ */
+ function createSwitchButton (buttonConfig) {
+    buttonConfig = {
+        width: buttonConfig && buttonConfig.width || 2,
+        height: buttonConfig && buttonConfig.height || 1,
+        openColor: buttonConfig && buttonConfig.openColor || 'rgb(47 179 170)',
+        closeColor: buttonConfig && buttonConfig.closeColor || 'rgb(33 70 127)',
+        openText: buttonConfig && buttonConfig.openText || '开',
+        closeText: buttonConfig && buttonConfig.closeText || '关',
+        clickFunc: buttonConfig && buttonConfig.buttonConfig,
+    };
+    let html = `<div style='width:${buttonConfig.width}rem;height:${buttonConfig.height}rem;line-height:${buttonConfig.height}rem;color:${buttonConfig.openColor};border:1px solid ${buttonConfig.openColor};border-radius:${buttonConfig.height / 2}rem;' itemData='${JSON.stringify(buttonConfig).replace(new RegExp(/( )/g),"")}' mode='close' onclick='switchButtonClick(this)'>`;
+    html += `<span style='display:inline-block;width:${buttonConfig.height}rem;height:${buttonConfig.height}rem;background-color:${buttonConfig.openColor};border-radius:${buttonConfig.height / 2}rem;'></span>`;
+    html += `<span style='display:inline-block;width:${buttonConfig.width-buttonConfig.height}rem;height:${buttonConfig.height}rem;'>${buttonConfig.openText}</span>`;
+    html += `</div>`;
+    return html;
+}
+
+/**
+ * @description 开关点击事件
+ * @param {Object} switchButton 开关元素
+ * @return 无
+ * @authors myf 2023-10-13
+ */
+function switchButtonClick (switchButton) {
+    // let html = '';
+    // const itemData = $(switchButton).attr('itemData');
+    // const mode = $(switchButton).attr('mode');
+    // if (mode === 'close') {
+    //     html = `<span style='display:inline-block;width:${itemData.width-itemData.height}rem;height:${itemData.height}rem;'>${itemData.closeText}</span>`;
+    //     html += `<span style='display:inline-block;width:${itemData.height}rem;height:${itemData.height}rem;background-color:${itemData.closeColor};border-radius:${itemData.height / 2}rem;'></span>`;
+    //     $(switchButton).css('color',itemData.closeColor);
+    //     $(switchButton).css('border','1px solid ' + itemData.closeColor);
+    //     $(switchButton).attr('mode', 'open');
+    // } else {
+    //     html = `<span style='display:inline-block;width:${itemData.height}rem;height:${itemData.height}rem;background-color:${itemData.openColor};border-radius:${itemData.height / 2}rem;'></span>`;
+    //     html += `<span style='display:inline-block;width:${itemData.width-itemData.height}rem;height:${itemData.height}rem;'>${itemData.openText}</span>`;
+    //     $(switchButton).css('color',itemData.openColor);
+    //     $(switchButton).css('border','1px solid ' + itemData.openColor);
+    //     $(switchButton).attr('mode', 'close');
+    // }
+    // $(switchButton).html(html);
+    console.log('啊啊啊');
+}
+function timeFormat (timeStr) {
+    // 原时间字符串
+    // const timeStr = "2023-09-07T11:16:00.000+08:00";
+
+    // 创建一个Date对象
+    const date = new Date(timeStr);
+
+    // 设置时区为UTC,避免时区转换的影响
+    date.setTime(date.getTime() + date.getTimezoneOffset()*60*1000);
+
+    // 构建新的时间字符串
+    const newTimeStr = date.getFullYear() + "-" + 
+                    (date.getMonth() + 1).toString().padStart(2, '0') + "-" +
+                    date.getDate().toString().padStart(2, '0') + " " +
+                    date.getHours().toString().padStart(2, '0') + ":" +
+                    date.getMinutes().toString().padStart(2, '0') + ":" +
+                    date.getSeconds().toString().padStart(2, '0');
+
+    // console.log(newTimeStr); 
+    return newTimeStr;
+}
+</script>
