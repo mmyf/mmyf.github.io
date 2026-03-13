@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Postman</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <h1 class="page-title">网页版简易 Postman</h1>
+
+    <section class="panel" aria-label="请求配置">
+      <h2>请求</h2>
+      <form id="requestForm" class="request-form">
+        <div class="row row-main">
+          <select id="methodSelect" class="method-select" aria-label="请求方法">
+            <option>GET</option>
+            <option>POST</option>
+            <option>PUT</option>
+            <option>PATCH</option>
+            <option>DELETE</option>
+            <option>HEAD</option>
+            <option>OPTIONS</option>
+          </select>
+          <input
+            id="urlInput"
+            class="url-input"
+            type="url"
+            placeholder="https://example.com/api"
+            required
+          />
+          <button id="sendBtn" class="send-btn" type="submit">发送</button>
+        </div>
+
+        <label class="field-label" for="headersInput">请求头（每行一个，格式：Key: Value）</label>
+        <textarea
+          id="headersInput"
+          class="textarea"
+          placeholder="Authorization: Bearer xxx&#10;Content-Type: application/json"
+        ></textarea>
+
+        <label class="field-label" for="bodyInput">请求体（GET/HEAD 会自动忽略）</label>
+        <textarea
+          id="bodyInput"
+          class="textarea body-input"
+          placeholder='{"name":"demo"}'
+        ></textarea>
+      </form>
+      <p class="hint">说明：浏览器环境会受 CORS 限制，跨域接口可能被拦截。</p>
+    </section>
+
+    <section class="panel" aria-label="响应结果">
+      <h2>响应</h2>
+      <div class="meta-row">
+        <span>状态：<strong id="statusValue">--</strong></span>
+        <span>耗时：<strong id="timeValue">--</strong></span>
+        <span>大小：<strong id="sizeValue">--</strong></span>
+      </div>
+
+      <label class="field-label" for="responseHeaders">响应头</label>
+      <pre id="responseHeaders" class="output"></pre>
+
+      <label class="field-label" for="responseBody">响应体</label>
+      <pre id="responseBody" class="output body-output"></pre>
+
+      <p id="errorOutput" class="error-text" role="alert"></p>
+    </section>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>
