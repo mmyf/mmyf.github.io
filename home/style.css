@@ -1,0 +1,90 @@
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+  background: #ffffff;
+  color: #1f2937;
+}
+
+.container {
+  width: min(900px, 92vw);
+  margin: 0 auto;
+  padding: 40px 0;
+  display: grid;
+  gap: 20px;
+}
+
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.title {
+  margin: 0 0 12px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.time {
+  margin: 0;
+  font-size: clamp(32px, 6vw, 56px);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.date {
+  margin: 8px 0 0;
+  font-size: 18px;
+  color: #4b5563;
+}
+
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.clear-btn {
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.clear-btn:hover {
+  background: #f9fafb;
+}
+
+.note-input {
+  width: 100%;
+  min-height: 220px;
+  resize: vertical;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 16px;
+  line-height: 1.5;
+  outline: none;
+}
+
+.note-input:focus {
+  border-color: #9ca3af;
+}
+
+.save-tip {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: #6b7280;
+}

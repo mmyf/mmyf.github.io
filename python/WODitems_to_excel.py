@@ -19,5 +19,8 @@ with pd.ExcelWriter('宝库内容20250508.xlsx', engine='openpyxl') as writer:
     worksheet.column_dimensions['D'].width = 10  # Hitpoints列
     worksheet.column_dimensions['F'].width = 40  # Itemclasses列
     worksheet.column_dimensions['G'].width = 15  # Unique-Type列
+    
+    # 添加EFG列的筛选功能
+    worksheet.auto_filter.ref = f"E1:G{len(df)+1}"
 
 print("Excel文件已生成完成！")

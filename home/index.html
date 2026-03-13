@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="card" aria-label="时间日期组件">
+      <h1 class="title">时间日期</h1>
+      <p id="time" class="time">--:--:--</p>
+      <p id="date" class="date">----年--月--日 星期-</p>
+    </section>
+
+    <section class="card" aria-label="便捷记事本">
+      <div class="note-header">
+        <h2 class="title">便捷记事本</h2>
+        <button id="clearBtn" type="button" class="clear-btn">清空</button>
+      </div>
+      <textarea
+        id="noteInput"
+        class="note-input"
+        placeholder="在这里记录内容，自动保存到本地..."
+      ></textarea>
+      <p id="saveTip" class="save-tip">未修改</p>
+    </section>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>
